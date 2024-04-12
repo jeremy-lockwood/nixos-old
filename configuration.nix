@@ -54,12 +54,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome = {
     enable = true;
-    #core-utilities.enable = true;
-  };
-  #hardware.enableRedistributableFirmware = true;
-  hardware.ipu6 = {  # intel settings for webcam
-    enable = true;
-    platform = "ipu6ep";  # alder lake cpu. laptop is dell xps 13 9315
   };
 
   # Configure keymap in X11
@@ -88,14 +82,11 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jeremy = {
     isNormalUser = true;
     description = "Jeremy Lockwood";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   # Allow unfree packages
@@ -106,27 +97,15 @@
   environment.systemPackages = with pkgs; [
     gnome.cheese
     git
-    # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
-    #gst_all_1.gstreamer
-    # Common plugins like "filesrc" to combine within e.g. gst-launch
-    #gst_all_1.gst-plugins-base
-    # Specialized plugins separated by quality
-    #gst_all_1.gst-plugins-good
-    #gst_all_1.gst-plugins-bad
-    #gst_all_1.gst-plugins-ugly
-    # Plugins to reuse ffmpeg to play almost every video format
-    #gst_all_1.gst-libav
-    # Support the Video Audio (Hardware) Acceleration API
-    #gst_all_1.gst-vaapi
     iputils
     manix
     usbutils
     wget
   ];
   
-  #nixpkgs.config.permittedInsecurePackages = [
-  #  "electron-25.9.0"  # for obsidian notes in home-manager
-  #];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"  # for obsidian notes in home-manager
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
